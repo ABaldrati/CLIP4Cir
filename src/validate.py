@@ -289,7 +289,7 @@ def main():
     if args.transform == 'targetpad':
         print('Target pad preprocess pipeline is used')
         preprocess = targetpad_transform(args.target_ratio, input_dim)
-    elif args.preprocess == 'squarepad':
+    elif args.transform == 'squarepad':
         print('Square pad preprocess pipeline is used')
         preprocess = squarepad_transform(input_dim)
     else:
