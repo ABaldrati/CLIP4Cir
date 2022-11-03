@@ -159,6 +159,9 @@ project_base_path
                 | split.rc2.val.json
 ```
 
+### Pre-trained models
+We provide the pre-trained (both CLIP and Combiner network) checkpoint via [Google Drive](https://drive.google.com/drive/folders/1ny2hhzP8HZBnXhjvDEni8P8G4_inCNTv?usp=sharing) in case you don't have enough GPU resources
+
 ### CLIP fine-tuning
 
 To fine-tune the CLIP model on FashionIQ or CIRR dataset run the following command with the desired hyper-parameters:
