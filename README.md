@@ -10,6 +10,7 @@
     * [Installation](#installation)
 * [Usage](#usage)
 * [Authors](#authors)
+* [Acknowledgements](#acknowledgements)
 
 ## About The Project
 
@@ -31,13 +32,12 @@
 
 ### Abstract
 
-Recent works have shown that large-scale vision and language pretrained (VLP) models can be used to address many different tasks, such as zero-shot learning or text-to-image retrieval.
-In this paper, we explore the use of features obtained from the OpenAI CLIP model to address the 
-task of composed image retrieval. This task is a new multimodal retrieval task where the query consists of a reference image and an associated text that adds information on conditions or changes that the user wants with respect to the reference image, i.e. the query is provided as an image-language pair
+Recent works have shown that large-scale vision and language pretrained (VLP) models can address many different tasks, such as zero-shot learning or text-to-image retrieval.
+In this paper, we address the task of composed image retrieval. In this recently introduced task, the query is provided as an image-text pair. Multi-modal content-based image retrieval is performed starting with a reference image and an additional text that describes in natural language conditions or changes with respect to the reference image, about the output images to be retrieved.
 
-To address this task, we initially perform a task-oriented fine-tuning of both CLIP encoders using a simple combination of visual and textual features. Then, in the second stage, we learn a Combiner network that can merge the fine-tuned features integrating the multimodal information and providing combined features used to perform the retrieval task. Contrastive learning is used in the training of both stages.
+To address this task, we explore the use of features obtained from the OpenAI CLIP model, and we initially perform a task-oriented fine-tuning of both CLIP encoders using a combination of visual and textual features. Then, in the second stage, we learn a Combiner network that can merge the fine-tuned features integrating the multimodal information and providing combined features used to perform the retrieval task. Contrastive learning is used in the training of both stages.
 
-Starting from the bare CLIP features as a simple baseline, we show that both the task-oriented fine-tuning and the carefully crafted Combiner network are highly effective and outperform more complex state-of-the-art approaches on FashionIQ and CIRR, two popular and challenging datasets for composed image retrieval
+Starting from the bare CLIP features as a baseline, we show that both the task-oriented fine-tuning and the carefully crafted Combiner network are highly effective and outperform more complex state-of-the-art approaches on FashionIQ and CIRR, two popular and challenging datasets for composed image retrieval
 
 ### Built With
 
@@ -200,6 +200,10 @@ python src/cirr_test_submission.py --submission-name {file name of the submissio
 * [**Marco Bertini**](https://scholar.google.it/citations?user=SBm9ZpYAAAAJ&hl=en)
 * [**Tiberio Uricchio**](https://scholar.google.it/citations?user=XHZLRdYAAAAJ&hl=en)
 * [**Alberto Del Bimbo**](https://scholar.google.it/citations?user=bf2ZrFcAAAAJ&hl=en)
+
+## Acknowledgements
+
+We gratefully acknowledge the support of NVIDIA Corporation with the donation of the Titan X Pascal GPU used for this research. This work was partially supported by the European Commission under European Horizon 2020 Programme, grant number 101004545 - ReInHerit.
 
 ## License
 
