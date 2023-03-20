@@ -167,7 +167,21 @@ We provide the pre-trained (both CLIP and Combiner network) checkpoint via [Goog
 To fine-tune the CLIP model on FashionIQ or CIRR dataset run the following command with the desired hyper-parameters:
 
 ```shell
-python src/clip_fine_tune.py --dataset {'CIRR' or 'FashionIQ'} --api-key {Comet-api-key} --workspace {Comet-workspace} --experiment-name {Comet-experiment-name} --num-epochs 100 --clip-model-name RN50x4 --encoder both --learning-rate 2e-6 --batch-size 128 --transform targetpad --target-ratio 1.25  --save-training --save-best --validation-frequency 1
+python src/clip_fine_tune.py 
+   --dataset {'CIRR' or 'FashionIQ'} 
+   --api-key {Comet-api-key} 
+   --workspace {Comet-workspace} 
+   --experiment-name {Comet-experiment-name} 
+   --num-epochs 100 
+   --clip-model-name RN50x4 
+   --encoder both 
+   --learning-rate 2e-6 
+   --batch-size 128 
+   --transform targetpad 
+   --target-ratio 1.25  
+   --save-training 
+   --save-best 
+   --validation-frequency 1
 ```
 
 ### Combiner training
@@ -175,7 +189,24 @@ python src/clip_fine_tune.py --dataset {'CIRR' or 'FashionIQ'} --api-key {Comet-
 To train the Combiner model on FashionIQ or CIRR dataset run the following command with the desired hyper-parameters:
 
 ```shell
-python src/combiner_train.py --dataset {'CIRR' or 'FashionIQ'} --api-key {Comet-api-key} --workspace {Comet-workspace} --experiment-name {Comet-experiment-name} --projection-dim 2560 --hidden-dim 5120 --num-epochs 300 --clip-model-name RN50x4 --clip-model-path {path-to-fine-tuned-CLIP} --combiner-lr 2e-5 --batch-size 4096 --clip-bs 32 --transform targetpad --target-ratio 1.25 --save-training --save-best --validation-frequency 1
+python src/combiner_train.py 
+   --dataset {'CIRR' or 'FashionIQ'} 
+   --api-key {Comet-api-key} 
+   --workspace {Comet-workspace} 
+   --experiment-name {Comet-experiment-name} 
+   --projection-dim 2560 
+   --hidden-dim 5120 
+   --num-epochs 300 
+   --clip-model-name RN50x4 
+   --clip-model-path {path-to-fine-tuned-CLIP} 
+   --combiner-lr 2e-5 
+   --batch-size 4096 
+   --clip-bs 32 
+   --transform targetpad 
+   --target-ratio 1.25 
+   --save-training 
+   --save-best 
+   --validation-frequency 1
 ```
 
 ### Validation
@@ -183,7 +214,16 @@ python src/combiner_train.py --dataset {'CIRR' or 'FashionIQ'} --api-key {Comet-
 To compute the metrics on the validation set run the following command
 
 ```shell
-python src/validate.py --dataset {'CIRR' or 'FashionIQ'} --combining-function {'combiner' or 'sum'} --combiner-path {path to trained Combiner} --projection-dim 2560 --hidden-dim 5120 --clip-model-name RN50x4 --clip-model-path {path-to-fine-tuned-CLIP} --target-ratio 1.25 --transform targetpad
+python src/validate.py 
+   --dataset {'CIRR' or 'FashionIQ'} 
+   --combining-function {'combiner' or 'sum'} 
+   --combiner-path {path to trained Combiner} 
+   --projection-dim 2560 
+   --hidden-dim 5120 
+   --clip-model-name RN50x4 
+   --clip-model-path {path-to-fine-tuned-CLIP} 
+   --target-ratio 1.25 
+   --transform targetpad
 ```
 
 ### Test
@@ -191,8 +231,18 @@ python src/validate.py --dataset {'CIRR' or 'FashionIQ'} --combining-function {'
 To generate the prediction files to be submitted on CIRR evaluation server run the following command:
 
 ```shell
-python src/cirr_test_submission.py --submission-name {file name of the submission} --combining-function {'combiner' or 'sum'} --combiner-path {path to trained Combiner} --projection-dim 4096 --hidden-dim 8192 --clip-model-name RN50x4 --clip-model-path {path-to-fine-tuned-CLIP} --target-ratio 1.25 --transform targetpad
+python src/cirr_test_submission.py 
+   --submission-name {file name of the submission} 
+   --combining-function {'combiner' or 'sum'} 
+   --combiner-path {path to trained Combiner} 
+   --projection-dim 2560 
+   --hidden-dim 5120 
+   --clip-model-name RN50x4 
+   --clip-model-path {path-to-fine-tuned-CLIP} 
+   --target-ratio 1.25 
+   --transform targetpad
 ```
+
 
 ## Authors
 
