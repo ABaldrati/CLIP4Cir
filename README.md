@@ -18,27 +18,49 @@
 
 ![](images/cir-overview.png "Composed image retrieval overview")
 
+The left portion of the illustration depicts a specific case of composed image retrieval in the fashion domain, where
+the user imposes constraints on the character attribute of a t-shirt. Meanwhile, the right part showcases an example 
+where the user asks to alter objects and their cardinality within a real-life image.
 ### CLIP task-oriented fine-tuning 
 
 ![](images/clip-fine-tuning.png "CLIP task oriented fine-tuning")
 
+First stage of training. In this stage, we perform a task-oriented fine-tuning of CLIP encoders to reduce the mismatch 
+between the large-scale pre-training and the downstream task. We start by extracting the 
+ image-text query features and combining them through an element-wise sum. We then employ a contrastive loss 
+to minimize the distance between combined features and target image features in the same triplet and maximize the 
+distance from the other images in the batch. We update the weights of both CLIP encoders.
 ### Combiner training 
 
 ![](images/combiner-training.png "Combiner training")
+
+Second stage of training. In this stage, we train from scratch a Combiner network that learns to fuse the multimodal 
+features extracted with CLIP encoders. We start by extracting the image-text query features using the fine-tuned 
+encoders, and we combine them using the Combiner network. We then employ a contrastive loss to minimize the distance 
+between combined features and target image features in the same triplet and maximize the distance from the other images 
+in the batch. We keep both CLIP encoders frozen while we only update the weights of the Combiner network.
+At inference time the fine-tuned encoders and the trained Combiner are used to produce an effective representation used 
+to query the database.
 
 ### Combiner architecture
 
 ![](images/Combiner-architecture.png "Combiner architecture overview")
 
+Architecture of the Combiner network $C_{\theta}$. It takes as input the multimodal query features and outputs a unified
+representation. $\sigma$ represents the sigmoid function. We denote the outputs of the first branch (1) as $\lambda$ 
+and $1 -\lambda$, while the output of the second branch (2) as $v$. The combined features are $\overline{\phi_q} = (1 - \lambda)* \overline{\psi_{I}}(I_q) + \lambda * \overline{\psi_{T}}(T_q) + v$
 ### Abstract
 
-Recent works have shown that large-scale vision and language pretrained (VLP) models can address many different tasks, such as zero-shot learning or text-to-image retrieval.
-In this paper, we address the task of composed image retrieval. In this recently introduced task, the query is provided as an image-text pair. Multi-modal content-based image retrieval is performed starting with a reference image and an additional text that describes in natural language conditions or changes with respect to the reference image, about the output images to be retrieved.
-
-To address this task, we explore the use of features obtained from the OpenAI CLIP model, and we initially perform a task-oriented fine-tuning of both CLIP encoders using a combination of visual and textual features. Then, in the second stage, we learn a Combiner network that can merge the fine-tuned features integrating the multimodal information and providing combined features used to perform the retrieval task. Contrastive learning is used in the training of both stages.
-
-Starting from the bare CLIP features as a baseline, we show that both the task-oriented fine-tuning and the carefully crafted Combiner network are highly effective and outperform more complex state-of-the-art approaches on FashionIQ and CIRR, two popular and challenging datasets for composed image retrieval
-
+Given a query composed of a reference image and a relative caption, the Composed Image Retrieval goal is to retrieve 
+images visually similar to the reference one that integrates the modifications expressed by the caption. Given that 
+recent research has demonstrated the efficacy of large-scale vision and language pretrained (VLP) models in various 
+tasks, we rely on features from the OpenAI CLIP model to tackle the considered task. We initially perform a task-oriented 
+fine-tuning of both CLIP encoders using the element-wise sum of visual and textual features. Then, in the second stage, 
+we train a Combiner network that learns to combine the image-text features integrating the bimodal information and 
+providing combined features used to perform the retrieval. We use contrastive learning in both stages of training. 
+Starting from the bare CLIP features as a baseline, experimental results show that the task-oriented fine-tuning and 
+the carefully crafted Combiner network are highly effective and outperform more complex state-of-the-art approaches on 
+FashionIQ and CIRR, two popular and challenging datasets for composed image retrieval.
 ### Built With
 
 * [Python](https://www.python.org/)
@@ -253,7 +275,7 @@ python src/cirr_test_submission.py
 
 ## Acknowledgements
 
-We gratefully acknowledge the support of NVIDIA Corporation with the donation of the Titan X Pascal GPU used for this research. This work was partially supported by the European Commission under European Horizon 2020 Programme, grant number 101004545 - ReInHerit.
+This work was partially supported by the European Commission under European Horizon 2020 Programme, grant number 101004545 - ReInHerit.
 
 ## License
 
