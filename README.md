@@ -2,8 +2,8 @@
 
 ### Composed Image Retrieval using Contrastive Learning and Task-oriented CLIP-based Features
 
-[![arXiv](https://img.shields.io/badge/arXiv-Paper-<COLOR>.svg)]([https://arxiv.org/abs/2303.15247](https://arxiv.org/abs/2308.11485))
-[![GitHub Stars](https://img.shields.io/github/stars/miccunifi/SEARLE?style=social)](https://github.com/ABaldrati/CLIP4Cir)
+[![arXiv](https://img.shields.io/badge/arXiv-Paper-<COLOR>.svg)](https://arxiv.org/abs/2308.11485)
+[![GitHub Stars](https://img.shields.io/github/stars/ABaldrati/CLIP4Cir?style=social)](https://github.com/ABaldrati/CLIP4Cir)
 
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/composed-image-retrieval-using-contrastive/image-retrieval-on-fashion-iq)](https://paperswithcode.com/sota/image-retrieval-on-fashion-iq?p=composed-image-retrieval-using-contrastive)
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/composed-image-retrieval-using-contrastive/image-retrieval-on-cirr)](https://paperswithcode.com/sota/image-retrieval-on-cirr?p=composed-image-retrieval-using-contrastive)
