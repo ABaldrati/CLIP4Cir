@@ -1,18 +1,56 @@
-# CLIP4Cir
+# CLIP4Cir (ACM TOMM 2023)
 
-### CLIP for Composed image retrieval
+### Composed Image Retrieval using Contrastive Learning and Task-oriented CLIP-based Features
 
-## Table of Contents
+[![arXiv](https://img.shields.io/badge/arXiv-Paper-<COLOR>.svg)]([https://arxiv.org/abs/2303.15247](https://arxiv.org/abs/2308.11485))
+[![GitHub Stars](https://img.shields.io/github/stars/miccunifi/SEARLE?style=social)](https://github.com/ABaldrati/CLIP4Cir)
 
-* [About the Project](#about-the-project)
-* [Getting Started](#getting-started)
-    * [Prerequisites](#prerequisites)
-    * [Installation](#installation)
-* [Usage](#usage)
-* [Authors](#authors)
-* [Acknowledgements](#acknowledgements)
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/composed-image-retrieval-using-contrastive/image-retrieval-on-fashion-iq)](https://paperswithcode.com/sota/image-retrieval-on-fashion-iq?p=composed-image-retrieval-using-contrastive)
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/composed-image-retrieval-using-contrastive/image-retrieval-on-cirr)](https://paperswithcode.com/sota/image-retrieval-on-cirr?p=composed-image-retrieval-using-contrastive)
+
+This is the **official repository** for the [**paper**](https://arxiv.org/abs/2308.11485) "*Composed Image Retrieval using Contrastive Learning and Task-oriented CLIP-based Features*".
+
+
+## Citation
+If you make use of our work, please cite our paper:
+```bibtex
+@article{baldrati2023composed,
+  title={Composed Image Retrieval using Contrastive Learning and Task-oriented CLIP-based Features},
+  author={Baldrati, Alberto and Bertini, Marco and Uricchio, Tiberio and del Bimbo, Alberto},
+  journal={arXiv preprint arXiv:2308.11485},
+  year={2023}
+}
+```
+
+If you are interested in Composed Image Retrieval (CIR) take a look also a look to our most recent work:
+[**Zero-Shot Composed Image Retrieval with Textual Inversion (ICCV 2023)**](https://arxiv.org/abs/2303.15247)
+[![Repo](https://badgen.net/badge/icon/GitHub?icon=github&label)](https://github.com/miccunifi/SEARLE)
+```bibtex
+@misc{baldrati2023zeroshot,
+      title={Zero-Shot Composed Image Retrieval with Textual Inversion}, 
+      author={Alberto Baldrati and Lorenzo Agnolucci and Marco Bertini and Alberto Del Bimbo},
+      year={2023},
+      eprint={2303.15247},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV}
+}
+```
 
 ## About The Project
+
+### Abstract
+
+Given a query composed of a reference image and a relative caption, the Composed Image Retrieval goal is to retrieve 
+images visually similar to the reference one that integrates the modifications expressed by the caption. Given that 
+recent research has demonstrated the efficacy of large-scale vision and language pretrained (VLP) models in various 
+tasks, we rely on features from the OpenAI CLIP model to tackle the considered task. We initially perform a task-oriented 
+fine-tuning of both CLIP encoders using the element-wise sum of visual and textual features. Then, in the second stage, 
+we train a Combiner network that learns to combine the image-text features integrating the bimodal information and 
+providing combined features used to perform the retrieval. We use contrastive learning in both stages of training. 
+Starting from the bare CLIP features as a baseline, experimental results show that the task-oriented fine-tuning and 
+the carefully crafted Combiner network are highly effective and outperform more complex state-of-the-art approaches on 
+FashionIQ and CIRR, two popular and challenging datasets for composed image retrieval.
+
 
 ### Composed image retrieval task
 
@@ -49,24 +87,6 @@ to query the database.
 Architecture of the Combiner network $C_{\theta}$. It takes as input the multimodal query features and outputs a unified
 representation. $\sigma$ represents the sigmoid function. We denote the outputs of the first branch (1) as $\lambda$ 
 and $1 -\lambda$, while the output of the second branch (2) as $v$. The combined features are $\overline{\phi_q} = (1 - \lambda)* \overline{\psi_{I}}(I_q) + \lambda * \overline{\psi_{T}}(T_q) + v$
-### Abstract
-
-Given a query composed of a reference image and a relative caption, the Composed Image Retrieval goal is to retrieve 
-images visually similar to the reference one that integrates the modifications expressed by the caption. Given that 
-recent research has demonstrated the efficacy of large-scale vision and language pretrained (VLP) models in various 
-tasks, we rely on features from the OpenAI CLIP model to tackle the considered task. We initially perform a task-oriented 
-fine-tuning of both CLIP encoders using the element-wise sum of visual and textual features. Then, in the second stage, 
-we train a Combiner network that learns to combine the image-text features integrating the bimodal information and 
-providing combined features used to perform the retrieval. We use contrastive learning in both stages of training. 
-Starting from the bare CLIP features as a baseline, experimental results show that the task-oriented fine-tuning and 
-the carefully crafted Combiner network are highly effective and outperform more complex state-of-the-art approaches on 
-FashionIQ and CIRR, two popular and challenging datasets for composed image retrieval.
-### Built With
-
-* [Python](https://www.python.org/)
-* [PyTorch](https://pytorch.org/)
-* [CLIP](https://github.com/openai/CLIP)
-* [Comet](https://www.comet.ml/site/)
 
 ## Getting Started
 
@@ -188,46 +208,46 @@ We provide the pre-trained (both CLIP and Combiner network) checkpoint via [Goog
 
 To fine-tune the CLIP model on FashionIQ or CIRR dataset run the following command with the desired hyper-parameters:
 
-```shell
-python src/clip_fine_tune.py 
-   --dataset {'CIRR' or 'FashionIQ'} 
-   --api-key {Comet-api-key} 
-   --workspace {Comet-workspace} 
-   --experiment-name {Comet-experiment-name} 
-   --num-epochs 100 
-   --clip-model-name RN50x4 
-   --encoder both 
-   --learning-rate 2e-6 
-   --batch-size 128 
-   --transform targetpad 
-   --target-ratio 1.25  
-   --save-training 
-   --save-best 
-   --validation-frequency 1
+```sh
+python src/clip_fine_tune.py \
+   --dataset {'CIRR' or 'FashionIQ'} \
+   --api-key {Comet-api-key} \
+   --workspace {Comet-workspace} \
+   --experiment-name {Comet-experiment-name} \
+   --num-epochs 100 \
+   --clip-model-name RN50x4 \
+   --encoder both \
+   --learning-rate 2e-6 \
+   --batch-size 128 \
+   --transform targetpad \
+   --target-ratio 1.25  \
+   --save-training \
+   --save-best \
+   --validation-frequency 1 
 ```
 
 ### Combiner training
 
 To train the Combiner model on FashionIQ or CIRR dataset run the following command with the desired hyper-parameters:
 
-```shell
-python src/combiner_train.py 
-   --dataset {'CIRR' or 'FashionIQ'} 
-   --api-key {Comet-api-key} 
-   --workspace {Comet-workspace} 
-   --experiment-name {Comet-experiment-name} 
-   --projection-dim 2560 
-   --hidden-dim 5120 
-   --num-epochs 300 
-   --clip-model-name RN50x4 
-   --clip-model-path {path-to-fine-tuned-CLIP} 
-   --combiner-lr 2e-5 
-   --batch-size 4096 
-   --clip-bs 32 
-   --transform targetpad 
-   --target-ratio 1.25 
-   --save-training 
-   --save-best 
+```sh
+python src/combiner_train.py \
+   --dataset {'CIRR' or 'FashionIQ'} \
+   --api-key {Comet-api-key} \
+   --workspace {Comet-workspace} \
+   --experiment-name {Comet-experiment-name} \
+   --projection-dim 2560 \
+   --hidden-dim 5120 \
+   --num-epochs 300 \
+   --clip-model-name RN50x4 \
+   --clip-model-path {path-to-fine-tuned-CLIP} \
+   --combiner-lr 2e-5 \
+   --batch-size 4096 \
+   --clip-bs 32 \
+   --transform targetpad \
+   --target-ratio 1.25 \
+   --save-training \
+   --save-best \
    --validation-frequency 1
 ```
 
@@ -237,14 +257,14 @@ To compute the metrics on the validation set run the following command
 
 ```shell
 python src/validate.py 
-   --dataset {'CIRR' or 'FashionIQ'} 
-   --combining-function {'combiner' or 'sum'} 
-   --combiner-path {path to trained Combiner} 
-   --projection-dim 2560 
-   --hidden-dim 5120 
-   --clip-model-name RN50x4 
-   --clip-model-path {path-to-fine-tuned-CLIP} 
-   --target-ratio 1.25 
+   --dataset {'CIRR' or 'FashionIQ'} \
+   --combining-function {'combiner' or 'sum'} \
+   --combiner-path {path to trained Combiner} \
+   --projection-dim 2560 \
+   --hidden-dim 5120 \
+   --clip-model-name RN50x4 \
+   --clip-model-path {path-to-fine-tuned-CLIP} \
+   --target-ratio 1.25 \
    --transform targetpad
 ```
 
@@ -254,14 +274,14 @@ To generate the prediction files to be submitted on CIRR evaluation server run t
 
 ```shell
 python src/cirr_test_submission.py 
-   --submission-name {file name of the submission} 
-   --combining-function {'combiner' or 'sum'} 
-   --combiner-path {path to trained Combiner} 
-   --projection-dim 2560 
-   --hidden-dim 5120 
-   --clip-model-name RN50x4 
-   --clip-model-path {path-to-fine-tuned-CLIP} 
-   --target-ratio 1.25 
+   --submission-name {file name of the submission} \
+   --combining-function {'combiner' or 'sum'} \
+   --combiner-path {path to trained Combiner} \
+   --projection-dim 2560 \
+   --hidden-dim 5120 \
+   --clip-model-name RN50x4 \
+   --clip-model-path {path-to-fine-tuned-CLIP} \
+   --target-ratio 1.25 \
    --transform targetpad
 ```
 
@@ -277,8 +297,3 @@ python src/cirr_test_submission.py
 
 This work was partially supported by the European Commission under European Horizon 2020 Programme, grant number 101004545 - ReInHerit.
 
-## License
-
-## Citation
-
-## Contacts
