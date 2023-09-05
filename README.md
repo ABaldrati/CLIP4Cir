@@ -16,9 +16,9 @@ If you make use of our work, please cite our paper:
 ```bibtex
 @article{baldrati2023composed,
   title={Composed Image Retrieval using Contrastive Learning and Task-oriented CLIP-based Features},
-  author={Baldrati, Alberto and Bertini, Marco and Uricchio, Tiberio and del Bimbo, Alberto},
-  journal={arXiv preprint arXiv:2308.11485},
-  year={2023}
+  author={Baldrati, Alberto and Bertini, Marco and Uricchio, Tiberio and Bimbo, Alberto Del},
+  journal={ACM Transactions on Multimedia Computing, Communications and Applications},
+  publisher={ACM New York, NY}
 }
 ```
 
